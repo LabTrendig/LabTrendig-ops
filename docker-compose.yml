@@ -6,13 +6,13 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - "5432:5432"
 
   backend:
-    image: registry.gitlab.com/cerezo-app/ops-cerezo/backend:develop
+    image: labtrendig/backend:develop
     hostname: backend
     ports:
-      - 8000:8000
+      - "8000:8000"
 
     links:
       - "database:database"

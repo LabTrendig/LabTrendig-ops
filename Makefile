@@ -1,17 +1,14 @@
 build:
 	cd docker && docker build \
 		--target base \
-		--tag registry.gitlab.com/cerezo-app/ops-cerezo/backend:latest \
+		--tag labtrendig/backend:latest \
 		.
 
 	cd docker && docker build \
 		--target develop \
-		--tag registry.gitlab.com/cerezo-app/ops-cerezo/backend:develop \
+		--tag labtrendig/backend:develop \
 		.
 
-push: build
-	docker push \
-		registry.gitlab.com/cerezo-app/ops-cerezo/backend:latest
-
-	docker push \
-		registry.gitlab.com/cerezo-app/ops-cerezo/backend:develop
+.PHONY: backend
+backend:
+	docker-compose run --rm --service-ports --use-aliases backend --shell
