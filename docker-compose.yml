@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  database:
+    build: ./postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  backend:
+    image: registry.gitlab.com/cerezo-app/ops-cerezo/backend:develop
+    hostname: backend
+    ports:
+      - 8000:8000
+
+    links:
+      - "database:database"
+
+    volumes:
+      - "home:/home/app"
+      - ".:/app"
+      - "pyenv:/python"
+
+volumes:
+  pyenv:
+  home:
+  pgdata:
